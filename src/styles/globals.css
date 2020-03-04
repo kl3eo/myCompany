@@ -1,0 +1,29 @@
+.container {
+  padding: 3em 10em 5em 5em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.error {
+  color: #f851a3;
+  margin-bottom: 1em;
+}
+
+.success {
+  color: #2ef96c;
+  margin-bottom: 1em;
+}
+
+.uppercase {
+  text-transform: capitalize;
+}
+
+.required {
+  display: block;
+  margin-left: 10em;
+  margin-bottom: 1em;
+  font-size: .7em;
+  color: #6c6b6b;
+}

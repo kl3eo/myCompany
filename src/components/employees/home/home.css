@@ -1,0 +1,59 @@
+.home {
+  position: relative;
+  padding: 3em 10em 5em 5em;
+}
+
+.home table {
+  display: block;
+  margin-top: 2em;
+}
+
+.home table tbody {
+  display: block;
+}
+
+.home table tbody tr {
+  position: relative;
+  display: block;
+  padding: 1em 2em;
+}
+
+.home table tbody tr:nth-child(odd) {
+  background-color: #e6e5e5;
+}
+
+.home .btn-delete {
+  right: 1em;
+}
+
+.DayPickerInput input {
+  width: 20em;
+  padding: 1em 1.2em;
+  margin-bottom: .3em;
+  border: 1px solid #cbcccd;
+  background-color: #d9dbdc;
+}
+
+.home button {
+  margin-left: 1em;
+}
+
+.home .expire {
+  color: #cccccc;
+}
+
+.home .expire .btn-delete {
+  color: #fababc;
+}
+
+.home .message {
+  margin-left: 0;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

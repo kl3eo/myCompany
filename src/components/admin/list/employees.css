@@ -1,0 +1,111 @@
+.employees {
+  padding: 5em 10em 5em 5em;
+}
+
+.employees table {
+  display: block;
+}
+
+.employees table thead {
+  /*padding: 1em 0;*/
+  display: block;
+  color: #ffffff;
+  background: #afafaf;
+}
+
+.employees table thead tr th {
+  width: 23em;
+  text-align: left;
+}
+
+.employees table thead tr th a {
+  display: block;
+  /*padding-right: 10em;*/
+  padding-top: 1em;
+  padding-left: 2em;
+  padding-bottom: 1em;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.employees table thead tr th a.padding {
+  padding-left: 5em;
+}
+
+.employees table thead tr th a.width {
+  padding-left: 8em;
+}
+
+.employees table thead tr th a:active {
+  color: #ffffff;
+}
+
+.employees table tbody {
+  display: block;
+  width: 100%;
+}
+
+.employees table tbody tr {
+  padding: 1em 0;
+  display: block;
+}
+
+.employees table tbody tr:nth-child(even) {
+  background-color: #e6e5e5;
+}
+
+.employees table tbody tr td {
+  width: 350px;
+  padding-left: 2em;
+  text-align: left;
+}
+
+.employees table tbody tr:hover {
+  background-color: #f0eeee;
+}
+
+.employees table tbody tr td .name {
+  text-decoration: none;
+  color: #000000;
+}
+
+.employees table tbody tr td .deactivate {
+  display: block;
+  padding-right: 4em;
+  text-decoration: none;
+  text-align: right;
+  color: #fb7878;
+}
+
+.employees table tbody tr td.tb-check, .employees table thead tr th.tb-check {
+  width: 50px;
+  padding: 0 0 0 1em;
+}
+
+.employees .employee-search {
+  position: absolute;
+  width: 20em;
+  right: 13em;
+  top: 16em;
+  padding: 1em 1.2em;
+  margin-bottom: .3em;
+  border-radius: .2em;
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
+  border: 1px solid #cbcccd;
+  background-color: #d9dbdc;
+}
+
+.employees-none {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 295px;
+  height: 20px;
+  font-size: 2em;
+  font-weight: bold;
+}
+
