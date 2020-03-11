@@ -23,16 +23,40 @@ import HomeComponent from '../components/employees/home/homeComponent';
 import ProfileComponent from '../components/employees/profile/profileComponent';
 import NotFoundComponent from '../components/notFoundComponent';
 
+import hoistStatics from "hoist-non-react-statics";
+
+const wrapped = (Component: any) => {
+    const C = (props: any | {}) => {
+        const {wrappedComponentRef, ...remainingProps} = props;
+
+        return (
+            <Route
+                children={routeComponentProps => (
+                    <Component
+                        {...remainingProps}
+                        ref={wrappedComponentRef}
+                    />
+                )}
+            />
+        );
+    };
+
+    C.displayName = `withRouter(${Component.displayName || Component.name})`;
+    C.WrappedComponent = Component;
+
+    return hoistStatics(C, Component);
+};
+
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
           <Switch>
-            <Route path='/' exact={true} component={LoginComponent} />
-            <Route path='/login' component={LoginComponent} />
-            <Route path='/register' component={RegisterComponent} />
-            <Route path='/forgot' component={ForgotComponent} />
+            <Route path='/' exact={true} component={wrapped(LoginComponent)} />
+            <Route path='/login' component={wrapped(LoginComponent)} />
+            <Route path='/register' component={wrapped(RegisterComponent)} />
+            <Route path='/forgot' component={wrapped(ForgotComponent)} />
             <PrivateRoute path='/logout' component={LogoutComponent} />
             <PrivateRoute path='/admin/dashboard' component={DashboardComponent} />
             <PrivateRoute path='/admin/list' component={EmployeesListComponent} />

@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.3",
     "@material-ui/icons": "^4.9.1",
+    "hoist-non-react-statics": "^3.3.2",
     "js-md5": "^0.7.3",
     "match-sorter": "^4.0.2",
     "moment": "^2.24.0",
