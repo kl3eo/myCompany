@@ -1,0 +1,21 @@
+docker run \
+  --name pg-node-orms \
+  -p 5432:5432 \
+  -e POSTGRES_PASSWORD=hunter12 \
+  -e POSTGRES_USER=orm-user \
+  -e POSTGRES_DB=orm-db \
+  -v ~/data/pg-node-orms:/var/lib/postgresql/data \
+  -d \
+  postgres
+  
+  
+
+docker run \
+  -it --rm \
+  --link pg-node-orms:postgres \
+  postgres \
+  psql \
+  -h postgres \
+  -U orm-user \
+  orm-db
+
