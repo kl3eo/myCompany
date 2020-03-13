@@ -16,8 +16,8 @@ class EmployeeDetailsUpdateComponent extends Component {
     isSuccess: null,
     message: '',
     employee: {},
-    profileImg: '',
-    oldProfileImg: ''
+    profileimg: '',
+    oldprofileimg: ''
   }
   
   constructor(props) {
@@ -29,22 +29,22 @@ class EmployeeDetailsUpdateComponent extends Component {
     this.props.dispatch(employeeDetailsAction({ employeeID: this.props.match.params.id }));
 
     if (typeof this.props.response.fill.response !== 'undefined') {
-        this.setState({...this.state, oldProfileImg: this.props.response.fill.response.profileImg}, () => {
-	//console.log('set1 to '+ this.state.oldProfileImg)
+        this.setState({...this.state, oldprofileimg: this.props.response.fill.response.profileimg}, () => {
+	//console.log('set1 to '+ this.state.oldprofileimg)
 	});
     } else {
 
         if (typeof this.props.response.details.response !== 'undefined') {
-            this.setState({...this.state, oldProfileImg: this.props.response.details.response.profileImg}, () => {
-	    //console.log('set2 to '+ this.state.oldProfileImg)
+            this.setState({...this.state, oldprofileimg: this.props.response.details.response.profileimg}, () => {
+	    //console.log('set2 to '+ this.state.oldprofileimg)
 	    });
         };
     }
   }
 
   onFileChange = (event)  => {
-        this.setState({ profileImg: event.target.files[0] })
-	this.setState({ oldProfileImg: '' })
+        this.setState({ profileimg: event.target.files[0] })
+	this.setState({ oldprofileimg: '' })
   }
       
   onHandleUpdateEmployee = (event) => {
@@ -57,11 +57,11 @@ class EmployeeDetailsUpdateComponent extends Component {
     let email = event.target.email.value;
     let role = event.target.role.value;
     let _id = this.props.response.details.response._id ? this.props.response.details.response._id : this.props.response.fill.response._id;
-    let profileImg = this.state.profileImg;
+    let profileimg = this.state.profileimg;
 
-if (this.state.oldProfileImg === '') {
+if (this.state.oldprofileimg === '') {
     const data = {
-      name, position, username, password, role, _id, email, profileImg, 
+      name, position, username, password, role, _id, email, profileimg, 
       admin: {
         access: user.role,
         id: user.id

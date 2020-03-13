@@ -8,12 +8,12 @@ const httpResponses = require('./');
 let user, activity, usernameCheck, passwordCheck;
 
 function save(request, response) {
-  const { name, role, position, username, password, email, profileImg } = request.body;
+  const { name, role, position, username, password, email, profileimg } = request.body;
   user = username;
   usernameCheck = username;
   passwordCheck = password;
 console.log(name);
-console.log(profileImg);
+console.log(profileimg);
   if (request.body.admin.access.toLowerCase() !== 'admin') {
     return response.json(httpResponses.clientAdminFailed);
   }
@@ -24,7 +24,7 @@ console.log(profileImg);
   
   utils.checkUserControl(request.body.admin.id)
     .then(user => {
-      let employee = new Employees({ name, email, role, position, profileImg, username, password, status: false, active: true });
+      let employee = new Employees({ name, email, role, position, profileimg, username, password, status: false, active: true });
 
       employee.save(error => {
         if (error) return response.json(error);

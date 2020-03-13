@@ -74,9 +74,7 @@ componentDidMount () {
 
     const name = this.props.obj.name === '' ? '-/-' : this.props.obj.name;
 
-    //const path = '/home/alex/react_projects/zaffar_server/public/'+this.props.obj.profileImg;
-    //const photo = this.props.obj.profileImg && fs.existsSync(path) ? '/img/'+this.props.obj.profileImg : '/img/anon.png';
-    const photo = this.props.obj.profileImg ? '/img/'+this.props.obj.profileImg : '/img/anon.png';
+    const photo = this.props.obj.profileimg ? '/img/'+this.props.obj.profileimg : '/img/anon.png';
 	
     return (
     <div>

@@ -14,13 +14,14 @@ class RegisterComponent extends Component {
   onHandleRegistration = (event) => {
     event.preventDefault();
 
-    let name = event.target.name.value;
+//    let name = event.target.name.value;
     let username = event.target.username.value;
     let password = event.target.password.value;
     let email = event.target.email.value;
 
     const data = {
-      name, username, password, email
+//      name, username, password, email
+	username, password, email
     };
 
     this.props.dispatch(registerUserAction(data));

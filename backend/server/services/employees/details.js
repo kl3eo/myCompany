@@ -26,13 +26,13 @@ function updateDetails(request, response) {
         _id: request.body._id
       };
 
-      let record = request.body.profileImg ? {
+      let record = request.body.profileimg ? {
         name: request.body.name,
         email: request.body.email,
         position: request.body.position,
         username: request.body.username,
         password: request.body.password,
-	profileImg: request.body.profileImg
+	profileimg: request.body.profileimg
       } : 
       {
         name: request.body.name,

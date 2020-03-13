@@ -37,7 +37,7 @@ const AddEmployeeView = (props) => (
       </div>
       <div>
       <label>Фото</label>
-             <input name="profileImg" type="file" onChange={props.onFileChange} />
+             <input name="profileimg" type="file" onChange={props.onFileChange} />
       </div>
       <div>
         <span className='required'>Все поля нужны.</span>

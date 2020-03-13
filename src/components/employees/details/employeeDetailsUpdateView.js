@@ -41,7 +41,7 @@ const EmployeeDetailsUpdateView = (props) => (
       </div>
       <div>
       <label>Фото</label>
-             <input name="profileImg" type="file" onChange={props.onFileChange} />{props.employee.profileImg}
+             <input name="profileimg" type="file" onChange={props.onFileChange} />{props.employee.profileimg}
       </div>      
       <div>
         <Button classes='btn success' buttonLabel='Сохранить' />

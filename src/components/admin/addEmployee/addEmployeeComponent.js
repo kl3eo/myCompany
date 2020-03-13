@@ -17,7 +17,7 @@ class NewEmployeeComponent extends Component {
     username: '',
     password: '',
     email: '',
-    profileImg: ''
+    profileimg: ''
   }
 
   componentDidMount() {
@@ -34,7 +34,7 @@ class NewEmployeeComponent extends Component {
     let username = event.target.username.value;
     let password = event.target.password.value;
     let email = event.target.email.value;
-    let profileImg = this.state.profileImg;
+    let profileimg = this.state.profileimg;
 
     this.setState({
       name: name,
@@ -45,7 +45,7 @@ class NewEmployeeComponent extends Component {
 	let user = JSON.parse(localStorage.getItem('user'));
 
       const data = {
-        name, role, position, username, password, email, profileImg, 
+        name, role, position, username, password, email, profileimg, 
         admin: {
           access: user.role,
           id: user.id
@@ -63,7 +63,7 @@ class NewEmployeeComponent extends Component {
   }
 
   onFileChange = (event)  => {
-        this.setState({ profileImg: event.target.files[0] })
+        this.setState({ profileimg: event.target.files[0] })
   }
   
   static getDerivedStateFromProps(nextProps, prevState) {

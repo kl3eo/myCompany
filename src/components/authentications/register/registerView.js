@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/*
+      <div>
+        <label>Name</label>
+        <input type="text" name="name" />
+      </div>
+*/      
 const RegisterView = (props) => (
   <div>
     <h3>Register Page</h3>
     {(!props.success) ? <div>{props.message}</div> : null}
     <form onSubmit={props.handleRegistration}>
-      <div>
-        <label>Name</label>
-        <input type="text" name="name" />
-      </div>
       <div>
         <label>Email</label>
         <input type="email" name="email" />

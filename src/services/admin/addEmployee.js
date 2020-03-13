@@ -7,13 +7,13 @@ export const addEmployeeService = (request) => {
   let md5 = require('js-md5');
   
   const NEW_ENDPOINT = baseurl('admin/new');
-  const USER_PROFILE_ENDPOINT = baseurl('admin/profileImg');
+  const USER_PROFILE_ENDPOINT = baseurl('admin/profileimg');
 
   var filename = ''
 
-  if (request.profileImg) {	
+  if (request.profileimg) {	
     const formData = new FormData()
-    formData.append('profileImg', request.profileImg)
+    formData.append('profileimg', request.profileimg)
  
     const options = {
       method: 'POST',
@@ -35,10 +35,10 @@ export const addEmployeeService = (request) => {
         return error;
       });
   
-    let pieces = request.profileImg.name.split('.');
+    let pieces = request.profileimg.name.split('.');
     const now = new Date()  
     const seconds_10_SinceEpoch = Math.round(now.getTime() / 10000)
-    const str = md5(request.profileImg.name + seconds_10_SinceEpoch);
+    const str = md5(request.profileimg.name + seconds_10_SinceEpoch);
     const chu1 = str.substr(0,8);
     const chu2 = str.substr(8,4);
     const chu3 = str.substr(12,4);
@@ -47,7 +47,7 @@ export const addEmployeeService = (request) => {
     filename = chu1 + '-' + chu2 + '-' + chu3 + '-' + chu4 + '-' + chu5 + '.' + pieces[pieces.length-1];
   } 
   
-  request.profileImg = filename;
+  request.profileimg = filename;
 
   const parameters = {
     method: 'POST',

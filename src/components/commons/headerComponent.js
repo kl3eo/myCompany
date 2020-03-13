@@ -10,7 +10,7 @@ class HeaderComponent extends Component {
 
   componentDidMount() {
     document.title = 'Моя компания';
-    this.props.dispatch(updateRefreshAction([]));
+    this.props.dispatch(updateRefreshAction([])); // we need this to flush stale messages
   }
 
   render() {

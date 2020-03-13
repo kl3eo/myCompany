@@ -52,7 +52,7 @@ var upload = multer({
 
 router.get('/list', passport.authenticate('jwt', { session: false }), listService.list);
 router.post('/new', passport.authenticate('jwt', { session: false }), newService.save);
-//router.post('/profileImg', passport.authenticate('jwt', { session: false }), newService.updateProfileImg);
+
 router.post('/deactivate', passport.authenticate('jwt', { session: false }), deactivateService.deactivate);
 router.post('/search', passport.authenticate('jwt', { session: false }), searchService.search);
 
@@ -60,7 +60,7 @@ router.get('/profile', passport.authenticate('jwt', { session: false }), profile
 router.put('/update', passport.authenticate('jwt', { session: false }), profileService.update);
 
 
-router.post('/profileImg', passport.authenticate('jwt', { session: false }), upload.single('profileImg'), (req, res, next) => {
+router.post('/profileimg', passport.authenticate('jwt', { session: false }), upload.single('profileimg'), (req, res, next) => {
 //
 })
 
