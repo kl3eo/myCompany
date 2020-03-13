@@ -10,6 +10,10 @@ const AdminUpdateView = ({profile, handleUpdateAdmin, success, message, role}) =
     <div className={(success) ? 'message success' : 'message error'}>{message}</div>
     <form onSubmit={handleUpdateAdmin}>
       <div>
+        <label>Name</label>
+        <input type="text" name="name" defaultValue={profile.name} className="fields" />
+      </div>
+      <div>
         <label>Username</label>
         <input type="text" name="username" defaultValue={profile.username} className="fields" />
       </div>

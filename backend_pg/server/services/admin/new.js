@@ -1,19 +1,23 @@
-const Employees = require('../../models/Employees');
-const Activities = require('../../models/Activities');
-
+const queries = require('../../queries');
 const utils = require('../../utils');
 const httpResponses = require('./');
 
+let user, usernameCheck, passwordCheck;
 
-let user, activity, usernameCheck, passwordCheck;
+const httpResponse = {
+  onUserSaveSuccess: {
+    success: true,
+    message: 'Successfully created new user.'
+  }
+}
 
 function save(request, response) {
+
   const { name, role, position, username, password, email, profileimg } = request.body;
   user = username;
   usernameCheck = username;
   passwordCheck = password;
-console.log(name);
-console.log(profileimg);
+
   if (request.body.admin.access.toLowerCase() !== 'admin') {
     return response.json(httpResponses.clientAdminFailed);
   }
@@ -24,17 +28,12 @@ console.log(profileimg);
   
   utils.checkUserControl(request.body.admin.id)
     .then(user => {
-      let employee = new Employees({ name, email, role, position, profileimg, username, password, status: false, active: true });
 
-      employee.save(error => {
-        if (error) return response.json(error);
+    	queries.createUser(username, password, email, name, position, role, profileimg, (err) => {
+    		if (err) return response.json(err);
+		return response.json(httpResponse.onUserSaveSuccess);
+    	})	 
 
-        activity = `Admin создал профиль ${request.body.name}`;
-
-        utils.setActivity(request.body.name, activity);
-
-        return response.json(httpResponses.employeeAddedSuccessfully);
-      });
     }).catch(error => {
       return response.json(error);
     });

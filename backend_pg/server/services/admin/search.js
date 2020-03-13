@@ -1,21 +1,21 @@
-const Employees = require('../../models/Employees');
-
+const queries = require('../../queries');
 const utils = require('../../utils');
 const httpResponses = require('./');
 
 function search(request, response) {
+  
   if (request.body.access.toLowerCase() !== 'admin') {
     return response.json(httpResponses.clientAdminFailed);
   }
 
   utils.checkUserControl(request.body.id)
     .then(admin => {
+    
       let search = request.body.search;
-      let regex = new RegExp(search,'i');
-
-      Employees.find({ $or: [ { username: regex }] }, (error, docs) => {
+ 
+      queries.getUserBySearch(search, (error, user) => {
         if (error) return response.json(error);
-        return response.json(docs)
+        return response.json(user)
       });
     })
     .catch(error => {

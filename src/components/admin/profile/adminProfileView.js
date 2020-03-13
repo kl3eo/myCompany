@@ -9,6 +9,9 @@ const AdminProfileView = ({ profile, match, id }) => (
     <table className='table'>
       <tbody>
         <tr>
+          <th>Name</th><td>{profile.name}</td>
+        </tr>
+        <tr>
           <th>Role</th><td>{profile.role}</td>
         </tr>
         <tr>

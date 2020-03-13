@@ -1,8 +1,7 @@
 const queries = require('../../queries');
 const utils = require('../../utils');
 const httpResponses = require('./');
-
-let activity;
+const bcrypt = require('bcrypt');
 
 function fetchDetails(request, response) {
   
@@ -25,7 +24,14 @@ function updateDetails(request, response) {
       let record = "name = '"+ request.body.name + "', email = '" + request.body.email + "', position = '" + request.body.position + "', username = '" + request.body.username + "'";
       
       record = request.body.profileimg ? record + ", profileimg = '"+ request.body.profileimg + "'" : record;
+
+      if (request.body.password) {
       
+	const salt = bcrypt.genSaltSync(10);
+	const hash = bcrypt.hashSync(request.body.password, salt);
+	record = record + ", password = '" + hash + "'"
+      }
+           
       queries.updateUserById(request.body._id, record , (error) => {
         if (error) return response.json(error);
         return response.json(httpResponses.onUpdateSuccess);

@@ -29,13 +29,13 @@ const getUsers = (request, response, callback) => {
   })
 }
 
-const createUser = (username, password, email, callback) => {
+const createUser = (username, password, email, name, position, role, profileimg, callback) => {
 
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, (err, hash) => {
         password = hash;
 
-	pool.query('INSERT INTO users (username, password, email) VALUES ($1, $2, $3) returning *', [username, password, email], (error, results) => {
+	pool.query('INSERT INTO users (username, password, email, name, position, role, profileimg) VALUES ($1, $2, $3, $4, $5, $6, $7) returning *', [username, password, email, name, position, role, profileimg], (error, results) => {
 		if (error) throw(error);
 		callback(error,results.rows[0]); 
 	})
@@ -69,8 +69,6 @@ const updateUserPassword = (username, password, callback) => {
 	)
       })
     })
-    
-    
 }
 
 const getUserById = (id, callback) => {
@@ -97,6 +95,15 @@ const getUserByUsername = (username, callback) => {
   })
 }
 
+const getUserBySearch = (search, callback) => {
+
+
+  pool.query('SELECT * FROM users WHERE username ~ $1 or name ~ $1', [search], (error, results) => {
+	if (error) throw(error);
+	callback(error,results.rows[0]); 
+  })
+}
+
 const comparePassword = function(pw1, pw2, cb) {
   bcrypt.compare(pw1, pw2, function(err, isMatch) {
     if (err) {
@@ -112,6 +119,7 @@ module.exports = {
   getUsers,
   getUserById,
   getUserByUsername,
+  getUserBySearch,
   comparePassword,
   createUser,
   updateUserById,

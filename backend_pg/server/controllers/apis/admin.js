@@ -33,6 +33,7 @@ const storage = multer.diskStorage({
 	const chu5 = str.substr(20,12);
         const fileName = chu1 + '-' + chu2 + '-' + chu3 + '-' + chu4 + '-' + chu5 + '.' + pieces[pieces.length-1];
         cb(null, fileName)
+	
     }
 });
 
@@ -59,7 +60,6 @@ router.post('/search', passport.authenticate('jwt', { session: false }), searchS
 router.get('/profile', passport.authenticate('jwt', { session: false }), profileService.get);
 router.put('/update', passport.authenticate('jwt', { session: false }), profileService.update);
 
-
-router.post('/profileimg', passport.authenticate('jwt', { session: false }), upload.single('profileimg'), (req, res, next) => {})
+router.post('/profileimg', passport.authenticate('jwt', { session: false }), upload.single('profileimg'), (req, res, next) => {return res.json();})
 
 module.exports = router;

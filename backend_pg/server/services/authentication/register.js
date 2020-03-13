@@ -26,8 +26,9 @@ function registerUser(request, response) {
     response.json(httpResponses.onValidationError);
   } else {
 
-    queries.createUser(username, password, email, (err,user) => {
-    console.log("added user "+user.username+", id = "+user._id);
+    queries.createUser(username, password, email, null, null, null, null, (err) => {
+    	if (err) return response.json(err);
+	return response.json(httpResponses.onUserSaveSuccess);
     })	 
   }
 }

@@ -21,6 +21,7 @@ class AdminUpdateComponent extends Component {
   handleUpdateAdmin = (event) => {
     event.preventDefault();
     const data = {
+      name: event.target.name.value,
       username: event.target.username.value,
       email: event.target.email.value,
       role: event.target.role.value,
