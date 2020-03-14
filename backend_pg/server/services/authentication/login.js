@@ -60,6 +60,9 @@ function comparePassword(user) {
       queries.updateUserById(user._id, 'status=true', (err) => {
         if (err) return http.json(err);
       });
+      
+      queries.createActivity(user.username,user.name + ' logged in', (err) => {if (err) return http.json(err);});
+      
       return http.json(responseToken);
     }
 

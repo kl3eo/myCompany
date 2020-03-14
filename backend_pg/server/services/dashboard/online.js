@@ -1,16 +1,15 @@
 'use strict';
-
-const Employees = require('../../models/Employees');
+const queries = require('../../queries');
 const utils = require('../../utils');
 
 function onlineCount(request, response) {
-  const id = request.query.id;
 
+  const id = request.query.id;
   utils.checkUserControl(id)
     .then(user => {
-      Employees.find({ status: true }, (error, docs) => {
+      queries.getUserByStatus( true, (error, users) => {
         if (error) return response.json(error);
-        return response.json(docs.length);
+        return response.json(users.length);
       });
     })
     .catch(error => {

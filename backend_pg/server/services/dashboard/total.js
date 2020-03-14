@@ -1,6 +1,5 @@
 'use strict';
-
-const Employees = require('../../models/Employees');
+const queries = require('../../queries');
 const utils = require('../../utils');
 
 function employeesCount(request, response) {
@@ -8,10 +7,10 @@ function employeesCount(request, response) {
 
   utils.checkUserControl(id)
     .then(user => {
-      Employees.find({}, (error, docs) => {
+      queries.countItems('users', (error, count) => {
         if (error) response.json(error);
 
-        response.json({ total: docs.length });
+        response.json({ total: count });
       });
     })
     .catch(error => {

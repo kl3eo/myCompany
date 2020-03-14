@@ -49,7 +49,7 @@ function updateDetails(request, response) {
       if (request.body.admin.access.toLowerCase() === 'admin') {
         record['role'] = request.body.role;
         activityUser = 'Admin';
-        activity = `${activityUser} обновил профиль ${record.username}'.`;  
+        activity = `${activityUser} обновил профиль ${record.username}.`;  
       } else {
         activityUser = user;
         activity = `${activityUser} обновил(а) свой профиль.`;

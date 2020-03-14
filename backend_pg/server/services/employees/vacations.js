@@ -1,36 +1,26 @@
-const Employees = require('../../models/Employees');
-const Activities = require('../../models/Activities');
-const Vacations = require('../../models/Vacations');
-
+const queries = require('../../queries');
 const utils = require('../../utils');
 const httpResponses = require('./');
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-let user, activity;
-
 function setVacations(request, response) {
+
   const { start, end, employeeID } = request.body;
 
-  const condition = {
-    start: { $gte: start },
-    end: { $lte: end },
-    employeeID: employeeID
-  };
-
-  Vacations.findOne(condition, (error, doc) => {
+  queries.findVacation(start, end, employeeID, (error, doc) => {
     if (error) return response.json(error);
     if (doc) return response.json(httpResponses.onVacationExist);
 
-    new Vacations(request.body).save((error, doc) => {
+    queries.createVacation(start, end, employeeID, (error, doc) => {
       if (error) return response.json(error);
 
       utils.getUser(request.body.employeeID)
-        .then(name => {
-          activity = `${name} set vacations`;
-          utils.setActivity(name, activity);
-
-          user = null;
+        .then(user => {
+		queries.getUserByUsername(user, function(error, user) {
+			if (error) return response.json(err);
+			queries.createActivity(user.username, user.name + ' set vacations', (err) => {if (err) return response.json(err);});
+		});          
         }).catch(err => {
           return response.json(err);
         });
@@ -41,10 +31,7 @@ function setVacations(request, response) {
 }
 
 function fetchVacations(request, response) {
-  Vacations.find({ employeeID: request.query.id })
-    .sort('-createdAt')
-    .lean()
-    .exec((error, docs) => {
+  queries.fetchVacations(request.query.id, (error, docs) => {
       if (error) return response.json(error);
       checkExpiredVacations(docs)
         .then(item => {
@@ -57,15 +44,16 @@ function fetchVacations(request, response) {
 }
 
 function formatDates(vacations) {
+
   return new Promise((resolve, reject) => {
     let dates = vacations.map(item => {
-      const startDate = new Date(item.start);
+      const startDate = new Date(item.start_date);
 
       const startDay = startDate.getDate();
       const startMonth = months[startDate.getMonth()];
       const startYear = startDate.getFullYear();
 
-      const endDate = new Date(item.end);
+      const endDate = new Date(item.end_date);
 
       const endDay = endDate.getDate();
       const endMonth = months[endDate.getMonth()];
@@ -82,6 +70,7 @@ function formatDates(vacations) {
 }
 
 function checkExpiredVacations(dates) {
+
   let index = 0;
   return new Promise((resolve, reject) => {
     const today = new Date();
@@ -102,22 +91,22 @@ function checkExpiredVacations(dates) {
 }
 
 function deleteVacation(request, response) {
-  Vacations.findOneAndDelete({ _id: request.body.id }, (error, docs) => {
+  
+  queries.deleteVacation(request.body.id , (error) => {
     if (error) return response.json(error);
-
-    Vacations.find({ employeeID: request.body.employeeID }, (error, doc) => {
-      if (error) return response.json(error);
-
+    
       utils.getUser(request.body.employeeID)
-        .then(name => {
-          activity = `${name} deleted vacation`;
-          utils.setActivity(name, activity);
+        .then(user => {
+		queries.getUserByUsername(user, function(error, user) {
+			if (error) return response.json(err);
+			queries.createActivity(user.username, user.name + ' deleted vacations', (err) => {if (err) return response.json(err);});
+		});          
         }).catch(err => {
           return response.json(err);
         });
 
       return response.json(httpResponses.onVacationDelete);
-    });
+
   });
 }
 

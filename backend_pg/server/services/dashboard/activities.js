@@ -1,8 +1,5 @@
 'use strict';
-
-const Employees = require('../../models/Employees');
-const Activities = require('../../models/Activities');
-
+const queries = require('../../queries');
 const utils = require('../../utils');
 
 function fetchActivities(request, response) {
@@ -10,9 +7,7 @@ function fetchActivities(request, response) {
 
   utils.checkUserControl(id)
     .then(user => {
-      Activities.find({}, null)
-        .sort('-createdAt')
-        .exec((error, docs) => {
+      queries.fetchActivities((error, docs) => {
           if (error) response.json(error);
           response.json(docs);
         });

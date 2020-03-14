@@ -26,15 +26,14 @@ function get(request, response) {
 
 function update(request, response) {
 
-let adminProfile = "name = '"+ request.body.name + "', email = '" + request.body.email + "', role = '" + request.body.role + "', username = '" + request.body.username + "'";
+let adminProfile = "name = '"+ request.body.name + "', email = '" + request.body.email + "', username = '" + request.body.username + "'";
 
   usernameCheck = request.body.username;
   passwordCheck = request.body.password;
   
   if (request.body.password) {
       
-	const salt = bcrypt.genSaltSync(10);
-	const hash = bcrypt.hashSync(request.body.password, salt);
+	const hash = bcrypt.hashSync(request.body.password, bcrypt.genSaltSync(10));
 	adminProfile = adminProfile + ", password = '" + hash + "'"
   }
 

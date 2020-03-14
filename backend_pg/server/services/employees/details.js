@@ -21,14 +21,13 @@ function updateDetails(request, response) {
   utils.getUser(request.body._id)
     .then(user => {
       
-      let record = "name = '"+ request.body.name + "', email = '" + request.body.email + "', position = '" + request.body.position + "', username = '" + request.body.username + "'";
+      let record = "name = '"+ request.body.name + "', email = '" + request.body.email + "', role = '" + request.body.role + "', position = '" + request.body.position + "', username = '" + request.body.username + "'";
       
       record = request.body.profileimg ? record + ", profileimg = '"+ request.body.profileimg + "'" : record;
 
       if (request.body.password) {
-      
-	const salt = bcrypt.genSaltSync(10);
-	const hash = bcrypt.hashSync(request.body.password, salt);
+
+	const hash = bcrypt.hashSync(request.body.password, bcrypt.genSaltSync(10));
 	record = record + ", password = '" + hash + "'"
       }
            
