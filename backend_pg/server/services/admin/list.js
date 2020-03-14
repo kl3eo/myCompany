@@ -1,5 +1,3 @@
-const Employees = require('../../models/Employees');
-
 const utils = require('../../utils');
 const httpResponses = require('./');
 const queries = require('../../queries');

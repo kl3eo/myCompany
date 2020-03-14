@@ -2,6 +2,7 @@ This is a fork from Zafar's Time-off app and server a) https://github.com/timeof
 
 You may use MongoDB or PostgreSQL as the backend; just run the commands "yarn" and  "nodemon index.js" from either of the two folders, "backend" or "backend_pg".
 
+
 ==== PG users
 
 there's no ORM (no, thank you, no :)) - hit your queries directly from "queries.js" definitions
@@ -16,5 +17,10 @@ create table vacations(_id serial, employeeID bigint, start_date date, end_date 
 etc.
 
 The server config (user/port, etc.) is found at "queries.js" in the "server" folder.
+
+NB: profile photos are uploaded to "backend/public", so PG users, please take care about the front's correct symbolic link "myCompany/public/img":
+
+"cd myCompany/public; rm img &&  ln -s ../backend_pg/public img" will do the trick 
+
 
 ![](./myCompany.png)
