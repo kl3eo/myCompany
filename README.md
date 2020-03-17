@@ -1,3 +1,6 @@
+Demo: https://juma24.com
+(use https://juma24.com/register to get (almost) instant access)
+
 This is a fork from Zafar's Time-off app and server a) https://github.com/timeoffthescheduler/app and b) https://github.com/timeoffthescheduler/server, respect.
 
 You may use MongoDB or PostgreSQL as the backend; just run the commands "yarn" and  "nodemon index.js" from either of the two folders, "backend" or "backend_pg".
@@ -13,7 +16,7 @@ some scheme definitions for PG (there's only one table "users" in PG, unlike col
 
 create table users (_id serial, username text unique, name text, password text, profileimg text, role text, position text, email text, status bool, active bool default true);
 create table activities(_id serial, username text, activity text, createdAt timestamp);
-create table vacations(_id serial, employeeID bigint, start_date date, end_date date, expire bool, createdAt timestamp);
+create table vacations(_id serial, playerid bigint, start_date date, end_date date, expire bool, createdAt timestamp);
 etc.
 
 The server config (user/port, etc.) is found at "queries.js" in the "server" folder.

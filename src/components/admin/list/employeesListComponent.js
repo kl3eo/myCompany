@@ -23,7 +23,7 @@ class EmployeesListComponent extends Component {
 
   constructor(props) {
     super(props);
-  
+/*  
     user = JSON.parse(localStorage.getItem('user'));
     
     this.setState({
@@ -31,7 +31,7 @@ class EmployeesListComponent extends Component {
           id: user.id,
           access: user.id
     }});
-
+*/
     this.props.dispatch(employeesListAction(this.state.data));
   }
 
